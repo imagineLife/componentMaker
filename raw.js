@@ -195,8 +195,15 @@ cli.responders.makeComponentFiles = function(str){
   //get ID from string
   let strArr = str.split(' ')
   let componentName = typeof(strArr[1]) == 'string' && strArr[1].length > 0 ? strArr[1] : false;
-  console.log('componentName')
-  console.log(componentName)
+  fs.mkdir(`${__dirname}/${componentName}`, err => {
+    if(err){
+      console.log('err')
+      console.log(err)
+    }else{
+      console.log('');
+    }
+  })
+  
 };
 
 // Create centered text on the screen
