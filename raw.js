@@ -36,7 +36,7 @@ const events = require('events');
 class _events extends events{};
 const e = new _events();
 
-const { hzLine, verticalSpace, logTheData } = require('./helpers')
+const { hzLine, verticalSpace, logTheData, compFromName } = require('./helpers')
 
 const makeHeader = (str) => {
 	hzLine();
@@ -200,7 +200,32 @@ cli.responders.makeComponentFiles = function(str){
       console.log('err')
       console.log(err)
     }else{
-      console.log('');
+      fs.open(`${__dirname}/${componentName}/${componentName}.js`,'a', (err, fileDescriptor) => {
+
+        if(err || !fileDescriptor){
+          return callback('Couldnt open file for appending')
+        }
+
+        let componentString = compFromName(componentString)
+
+        //Append to file and close the file
+        fs.appendFile(fileDescriptor,`${componentString}\n`, err => {
+          if(err){
+            return callback('error appending and closing the file')
+          }
+
+          //close the file
+          fs.close(fileDescriptor, (err) => {
+            if(err){
+              console.log('ERROR');
+              console.log(err)
+              return
+            }
+            console.log('DONE!');
+            return false
+          })
+        })
+      })
     }
   })
   
