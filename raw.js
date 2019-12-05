@@ -190,33 +190,13 @@ cli.responders.moreUserInfo = function(str){
 };
 
 // More order info
-cli.responders.moreOrderInfo = function(str){
+cli.responders.makeComponentFiles = function(str){
   
   //get ID from string
-  let strArr = str.split('--')
-  let orderID = typeof(strArr[1]) == 'string' && strArr[1].length > 0 ? strArr[1] : false;
-  
-  if(orderID){
-    let orderIDPath = path.join(__dirname,`/../.logs/charges/${orderID}.log`)
-    fs.readFile(orderIDPath,'utf8',(err, orderData) => {
-    if(!err && orderData){
-      let itms = JSON.parse(orderData)
-      let objKeys = Object.keys(itms)
-      objKeys.forEach(objKey => {
-        let thisVal = itms[objKey]
-        let thisObj = {}
-        thisObj[objKey] = thisVal
-        if(objKey == 'cartData'){
-          thisObj['cartData'] = {
-            items: JSON.stringify(itms.cartData.cartData),
-            total: `$${itms.cartData.total / 100}.00`
-          }
-        }
-        console.dir(thisObj, {'colors': true});
-      })
-    }
-  })
-  }
+  let strArr = str.split(' ')
+  let componentName = typeof(strArr[1]) == 'string' && strArr[1].length > 0 ? strArr[1] : false;
+  console.log('componentName')
+  console.log(componentName)
 };
 
 // Create centered text on the screen
@@ -286,7 +266,7 @@ cli.processInput = function(str){
 	 and is read from, the input stream.
 */
 // Send to console, in dark blue
-console.log('\x1b[34m%s\x1b[0m','The CLI is running');
+console.log('\x1b[34m%s\x1b[0m','Make a component directory by name');
 
 // Start the interface
 let cliInterface = readline.createInterface({
