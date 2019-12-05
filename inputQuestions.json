@@ -1,0 +1,26 @@
+[
+  {
+    type: 'input',
+    name: 'first_name',
+    message: "What's your first name",
+    default: defaultFirstName
+  },
+  {
+    type: 'input',
+    name: 'last_name',
+    message: "What's your last name",
+    default: defaultLastName
+  },
+  {
+    type: 'input',
+    name: 'fav_color',
+    message: "What's your favorite color",
+    transformer: transformColor
+  },
+  {
+    type: 'input',
+    name: 'phone',
+    message: "What's your phone number",
+    validate: validatePhoneNumber
+  }
+]
