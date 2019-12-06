@@ -41,7 +41,15 @@ let str =
 const ${compName} = () => (<p>${compName}</p>);
 
 export default ${compName};`
-
+return str
 }
 
-module.exports = {hzLine, verticalSpace, compFromName}
+const indexFromString = (compName) => {
+  let str = 
+`import ${indexFromString} from './${indexFromString}';
+export default ${indexFromString};
+`
+return str
+}
+
+module.exports = {hzLine, verticalSpace, compFromName, indexFromString}
